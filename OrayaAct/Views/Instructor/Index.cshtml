@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Instructor>;
+<div>Instructor List</div>
+
+
+<table class="table">
+
+    <tr>
+        <th colspan="6">Instructor</th>
+    </tr>
+
+    <tr>
+        <td>Name</td>
+        <td>Tenure</td>
+        <td>Rank</td>
+        <td>Hiring Date</td>
+        <td>Details</td>
+
+    </tr>
+    @foreach (var instructor in Model)
+    {
+        <tr>
+            <td>@instructor.FirstName @instructor.LastName</td>
+                @{
+                    if (instructor.IsTenured)
+                    {
+                        <td>Permanent</td>
+                    }
+                    else
+                    {
+                    <td>Probationary</td>
+                    }
+                }
+            <td>@instructor.Rank</td>
+            <td>@instructor.HiringDate</td>
+            <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
+
+        </tr>
+    }
+</table>

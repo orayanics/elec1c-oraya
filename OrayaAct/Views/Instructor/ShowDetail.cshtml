@@ -1,0 +1,39 @@
+﻿@model Instructor;
+
+<h1>Student Details</h1>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Last Name</th>
+        <td>@Model.LastName</td>
+    </tr>
+    <tr>
+        <th>First Name</th>
+        <td>@Model.FirstName</td>
+    </tr>
+    <tr>
+        <th>Tenure</th>
+        @{
+            if (Model.IsTenured)
+            {
+                <td>Permanent</td>
+            }
+            else
+            {
+                <td>Probationary</td>
+            }
+        }
+    </tr>
+    <tr>
+        <th>Rank</th>
+        <td>@Model.Rank</td>
+    </tr>
+    <tr>
+        <th>Hiring Date</th>
+        <td>@Model.HiringDate</td>
+    </tr>
+</table>

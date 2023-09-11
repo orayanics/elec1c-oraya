@@ -80,7 +80,16 @@
         <p class="h4 fw-bold">C. Sample Output</p>
         <p>Name</p>
         <p>Email: @Email</p>
-        <p>Status: @IsTenured</p>
+        @{
+            if (IsTenured)
+            {
+                <p>Status: Permanent</p>
+            }
+            else
+            {
+                <p>Status: Probationary</p>
+            }
+        }
         <p>Daily Salary: @salaryPerDay</p>
         <p>Monthly Salary: @salaryPerMonth</p>
     </div>
