@@ -7,15 +7,15 @@ namespace OrayaAct.Controllers
     {
         List<Instructor> InstructorList = new List<Instructor>
         {
-            //new Instructor()
-            //{
-            //    Id = 1,
-            //    FirstName = "Gabriel",
-            //    LastName = "Montano",
-            //    IsTenured = true,
-            //    Rank = Rank.Instructor,
-            //    HiringDate = DateOnly.Parse("2022/05/21")
-            //},
+            new Instructor()
+            {
+                Id = 1,
+                FirstName = "Gabriel",
+                LastName = "Montano",
+                IsTenured = true,
+                Rank = Rank.Instructor,
+                HiringDate = DateOnly.Parse("2022/05/21")
+            },
             //new Instructor()
             //{
             //    Id = 2,
@@ -72,6 +72,37 @@ namespace OrayaAct.Controllers
         public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Update(Instructor newInstructor)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == newInstructor.Id);
+
+            if (instructor != null)
+            {
+                instructor.Id = newInstructor.Id;
+                instructor.FirstName = newInstructor.FirstName;
+                instructor.LastName = newInstructor.LastName;
+                instructor.IsTenured = newInstructor.IsTenured;
+                instructor.Rank = newInstructor.Rank;
+                instructor.HiringDate = newInstructor.HiringDate;
+            }
+
+            return View("Index", InstructorList);
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == id);
+
+            if (instructor != null)
+            {
+                return View(instructor);
+            }
+
+            return NotFound();
         }
     }
 }

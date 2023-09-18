@@ -15,6 +15,7 @@
         <td>Rank</td>
         <td>Hiring Date</td>
         <td>Details</td>
+        <td>Update</td>
 
     </tr>
     @foreach (var instructor in Model)
@@ -34,6 +35,7 @@
             <td>@instructor.Rank</td>
             <td>@instructor.HiringDate</td>
             <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
+            <td><a asp-action="Update" asp-route-id="@instructor.Id">Update Details</a></td>
 
         </tr>
     }

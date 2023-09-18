@@ -7,16 +7,16 @@ namespace OrayaAct.Controllers
     {
         List<Student> StudentList = new List<Student>
         {
-            //new Student()
-            //{
-            //    Id = 1,
-            //    FirstName = "Nicole",
-            //    LastName = "Oraya",
-            //    GPA = 1.4,
-            //    Course = Course.BSIT,
-            //    AdmissionDate = DateOnly.Parse("2022/1/31"),
-            //    Email = "nicole.oraya.cics@ust.edu.ph"
-            //},
+            new Student()
+            {
+                Id = 1,
+                FirstName = "Nicole",
+                LastName = "Oraya",
+                GPA = 1.4,
+                Course = Course.BSIT,
+                AdmissionDate = DateOnly.Parse("2022/1/31"),
+                Email = "nicole.oraya.cics@ust.edu.ph"
+            },
             //new Student()
             //{
             //    Id = 2,
@@ -79,6 +79,38 @@ namespace OrayaAct.Controllers
         public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Update(Student newStudent)
+        {
+            Student? student = StudentList.FirstOrDefault(x => x.Id == newStudent.Id);
+
+            if (student != null)
+            {
+                student.Id = newStudent.Id;
+                student.FirstName = newStudent.FirstName;
+                student.LastName = newStudent.LastName;
+                student.GPA = newStudent.GPA;
+                student.Course = newStudent.Course;
+                student.AdmissionDate = newStudent.AdmissionDate;
+                student.Email = newStudent.Email;
+            }
+
+            return View("Index", StudentList);
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Student? student = StudentList.FirstOrDefault(x => x.Id == id);
+
+            if (student != null)
+            {
+                return View(student);
+            }
+
+            return NotFound();
         }
     }
 }

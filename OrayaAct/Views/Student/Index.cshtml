@@ -16,6 +16,7 @@
         <td>Email</td>
         <td>GPA</td>
         <td>Details</td>
+        <td>Update</td>
 
 
     </tr>
@@ -28,6 +29,7 @@
             <td>@student.Email</td>
             <td>@student.GPA</td>
             <td><a asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
+            <td><a asp-action="Update" asp-route-id="@student.Id">Update Student</a></td>
 
         </tr>
     }
