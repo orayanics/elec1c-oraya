@@ -104,5 +104,24 @@ namespace OrayaAct.Controllers
 
             return NotFound();
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == id);
+            InstructorList.Remove(instructor);
+            return View("Index", InstructorList);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == id);
+            if (instructor != null)
+            {
+                return View(instructor);
+            }
+            return NotFound();
+        }
     }
 }
