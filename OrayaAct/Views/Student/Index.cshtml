@@ -17,7 +17,7 @@
         <td>GPA</td>
         <td>Details</td>
         <td>Update</td>
-
+        <td>Delete</td>
 
     </tr>
     @foreach (var student in Model)
@@ -30,6 +30,7 @@
             <td>@student.GPA</td>
             <td><a asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
             <td><a asp-action="Update" asp-route-id="@student.Id">Update Student</a></td>
+            <td><a asp-action="Delete" asp-route-id="@student.Id">Delete</a></td>
 
         </tr>
     }
