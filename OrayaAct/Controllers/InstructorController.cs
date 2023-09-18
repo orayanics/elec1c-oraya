@@ -7,42 +7,42 @@ namespace OrayaAct.Controllers
     {
         List<Instructor> InstructorList = new List<Instructor>
         {
-            new Instructor()
-            {
-                Id = 1,
-                FirstName = "Gabriel",
-                LastName = "Montano",
-                IsTenured = true,
-                Rank = Rank.Instructor,
-                HiringDate = DateTime.Parse("2022/05/21")
-            },
-            new Instructor()
-            {
-                Id = 2,
-                FirstName = "Mia",
-                LastName = "Eleazar",
-                IsTenured = true,
-                Rank = Rank.AssistantProfessor,
-                HiringDate = DateTime.Parse("2021/05/21")
-            },
-            new Instructor()
-            {
-                Id = 3,
-                FirstName = "Arthur",
-                LastName = "Ollanda",
-                IsTenured = true,
-                Rank = Rank.AssociateProfessor,
-                HiringDate = DateTime.Parse("2019/05/21")
-            },
-            new Instructor()
-            {
-                Id = 4,
-                FirstName = "Leonid",
-                LastName = "Lintag",
-                IsTenured = true,
-                Rank = Rank.Professor,
-                HiringDate = DateTime.Parse("2019/05/21")
-            },
+            //new Instructor()
+            //{
+            //    Id = 1,
+            //    FirstName = "Gabriel",
+            //    LastName = "Montano",
+            //    IsTenured = true,
+            //    Rank = Rank.Instructor,
+            //    HiringDate = DateOnly.Parse("2022/05/21")
+            //},
+            //new Instructor()
+            //{
+            //    Id = 2,
+            //    FirstName = "Mia",
+            //    LastName = "Eleazar",
+            //    IsTenured = true,
+            //    Rank = Rank.AssistantProfessor,
+            //    HiringDate = DateOnly.Parse("2021/05/21")
+            //},
+            //new Instructor()
+            //{
+            //    Id = 3,
+            //    FirstName = "Arthur",
+            //    LastName = "Ollanda",
+            //    IsTenured = true,
+            //    Rank = Rank.AssociateProfessor,
+            //    HiringDate = DateOnly.Parse("2019/05/21")
+            //},
+            //new Instructor()
+            //{
+            //    Id = 4,
+            //    FirstName = "Leonid",
+            //    LastName = "Lintag",
+            //    IsTenured = true,
+            //    Rank = Rank.Professor,
+            //    HiringDate = DateOnly.Parse("2019/05/21")
+            //},
         };
         public IActionResult Index()
         {
@@ -59,6 +59,19 @@ namespace OrayaAct.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Instructor newInstructor)
+        {
+            InstructorList.Add(newInstructor);
+            return View("Index", InstructorList);
+        }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }

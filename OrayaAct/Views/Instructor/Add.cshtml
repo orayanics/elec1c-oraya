@@ -1,0 +1,40 @@
+﻿@model Instructor;
+
+<div>Add Instructor</div>
+
+<form method="post" asp-action="Add">
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label">First Name</label>
+        <input asp-for="FirstName" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label">Last Name</label>
+        <input asp-for="LastName" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <p>Position: IsTenured</p>
+        <label asp-for="IsTenured" class="form-label">Yes</label>
+        <input asp-for="IsTenured" type="radio" name="istenured" value="true" />
+        <label asp-for="IsTenured" class="form-label">No</label>
+        <input asp-for="IsTenured" type="radio" name="istenured" value="false" />
+    </div>
+
+    <label asp-for="Rank" class="form-label">Rank</label>
+    <select asp-for=Rank class="form-select" aria-label="Select rank">
+        <option selected value="Instructor">Instructor</option>
+        <option value="AssistantProfessor">AssistantProfessor</option>
+        <option value="AssociateProfessor">AssociateProfessor</option>
+        <option value="Professor">Professor</option>
+    </select>
+    @*     <select class="form-select-sm" asp-for="Course" asp-items="Html.GetEnumSelectList(typeof(Course))"></select>
+    *@
+
+    <div class="mb-3">
+        <label asp-for="HiringDate" class="form-label">Hiring Date</label>
+        <input asp-for="HiringDate" type="date" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
