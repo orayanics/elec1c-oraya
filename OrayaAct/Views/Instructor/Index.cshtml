@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<Instructor>;
-<div>Instructor List</div>
 
-<a asp-action="Add">Add Instructor</a>
+<a asp-action="Add" class="btn btn-primary">Add Instructor</a>
 
 <table class="table">
 
     <tr>
-        <th colspan="6">Instructor</th>
+        <th colspan="7">Instructor</th>
     </tr>
 
     <tr>
@@ -35,9 +34,9 @@
                 }
             <td>@instructor.Rank</td>
             <td>@instructor.HiringDate</td>
-            <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id">Show Details</a></td>
-            <td><a asp-action="Update" asp-route-id="@instructor.Id">Update Details</a></td>
-            <td><a asp-action="Delete" asp-route-id="@instructor.Id">Delete</a></td>
+            <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id" class="btn btn-primary">Show Details</a></td>
+            <td><a asp-action="Update" asp-route-id="@instructor.Id" class="btn btn-primary">Update Details</a></td>
+            <td><a asp-action="Delete" asp-route-id="@instructor.Id" class="btn btn-danger">Delete</a></td>
 
         </tr>
     }

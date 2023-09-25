@@ -13,12 +13,17 @@
         <input asp-for="LastName" class="form-control">
     </div>
 
+
     <div class="mb-3">
-        <p>Position: IsTenured</p>
-        <label asp-for="IsTenured" class="form-label">Yes</label>
-        <input asp-for="IsTenured" type="radio" name="istenured" value="true" />
-        <label asp-for="IsTenured" class="form-label">No</label>
-        <input asp-for="IsTenured" type="radio" name="istenured" value="false" />
+        <p>Position</p>
+        <div class="form-check">
+            <input asp-for="IsTenured" type="radio" name="istenured" value="true" class="form-check-input"/>
+            <label asp-for="IsTenured" class="form-label" class="form-check-label">Permanent</label>
+        </div>
+        <div class="form-check">
+            <input asp-for="IsTenured" type="radio" name="istenured" value="false" class="form-check-input" />
+            <label asp-for="IsTenured" class="form-label" class="form-check-label">Probationary</label>
+        </div>
     </div>
 
     <label asp-for="Rank" class="form-label">Rank</label>

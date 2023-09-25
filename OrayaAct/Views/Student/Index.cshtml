@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<Student>;
 
-<a asp-action="Add">Add Student</a>
+<a asp-action="Add" class="btn btn-primary">Add Student</a>
 
-<div>Student List</div>
 <table class="table">
 
     <tr>
-        <th colspan="6">Student</th>
+        <th colspan="8">Student</th>
     </tr>
 
     <tr>
@@ -18,7 +17,6 @@
         <td>Details</td>
         <td>Update</td>
         <td>Delete</td>
-
     </tr>
     @foreach (var student in Model)
     {
@@ -28,9 +26,9 @@
             <td>@student.AdmissionDate</td>
             <td>@student.Email</td>
             <td>@student.GPA</td>
-            <td><a asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
-            <td><a asp-action="Update" asp-route-id="@student.Id">Update Student</a></td>
-            <td><a asp-action="Delete" asp-route-id="@student.Id">Delete</a></td>
+            <td><a asp-action="ShowDetail" asp-route-id="@student.Id" class="btn btn-primary">Show Details</a></td>
+            <td><a asp-action="Update" asp-route-id="@student.Id" class="btn btn-primary">Update Student</a></td>
+            <td><a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger">Delete</a></td>
 
         </tr>
     }
