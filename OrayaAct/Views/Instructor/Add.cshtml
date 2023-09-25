@@ -3,6 +3,11 @@
 <div>Add Instructor</div>
 
 <form method="post" asp-action="Add">
+    <div class="mb-3 d-none">
+        <label asp-for="Id" class="form-label d-none">Id</label>
+        <input asp-for="Id" class="form-control d-none" value="@ViewBag.increment" placeholder="@ViewBag.increment">
+    </div>
+
     <div class="mb-3">
         <label asp-for="FirstName" class="form-label">First Name</label>
         <input asp-for="FirstName" class="form-control">

@@ -1,57 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrayaAct.Models;
+using OrayaAct.Services;
 
 namespace OrayaAct.Controllers
 {
     public class InstructorController : Controller
     {
-        List<Instructor> InstructorList = new List<Instructor>
+        // Call interface
+        private IPopulateDataService? _populateData;
+
+        // Constructor to instantiate
+        public InstructorController(IPopulateDataService populateData)
         {
-            new Instructor()
-            {
-                Id = 1,
-                FirstName = "Gabriel",
-                LastName = "Montano",
-                IsTenured = true,
-                Rank = Rank.Instructor,
-                HiringDate = DateOnly.Parse("2022/05/21")
-            },
-            new Instructor()
-            {
-                Id = 2,
-                FirstName = "Mia",
-                LastName = "Eleazar",
-                IsTenured = true,
-                Rank = Rank.AssistantProfessor,
-                HiringDate = DateOnly.Parse("2021/05/21")
-            },
-            new Instructor()
-            {
-                Id = 3,
-                FirstName = "Arthur",
-                LastName = "Ollanda",
-                IsTenured = true,
-                Rank = Rank.AssociateProfessor,
-                HiringDate = DateOnly.Parse("2019/05/21")
-            },
-            new Instructor()
-            {
-                Id = 4,
-                FirstName = "Leonid",
-                LastName = "Lintag",
-                IsTenured = true,
-                Rank = Rank.Professor,
-                HiringDate = DateOnly.Parse("2019/05/21")
-            },
-        };
+            _populateData = populateData;
+        }
+
         public IActionResult Index()
         {
-            return View(InstructorList);
+            return View(_populateData.InstructorList);
         }
 
         public IActionResult ShowDetail(int id)
         {
-            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == id);
+            Instructor? instructor = _populateData.InstructorList.FirstOrDefault(x => x.Id == id);
 
             if (instructor != null)
             {
@@ -64,20 +35,22 @@ namespace OrayaAct.Controllers
         [HttpPost]
         public IActionResult Add(Instructor newInstructor)
         {
-            InstructorList.Add(newInstructor);
-            return View("Index", InstructorList);
+            _populateData.InstructorList.Add(newInstructor);
+            return View("Index", _populateData.InstructorList);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
+            var number = (_populateData.InstructorList.Count + 1).ToString();
+            ViewBag.increment = number;
             return View();
         }
 
         [HttpPost]
         public IActionResult Update(Instructor newInstructor)
         {
-            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == newInstructor.Id);
+            Instructor? instructor = _populateData.InstructorList.FirstOrDefault(x => x.Id == newInstructor.Id);
 
             if (instructor != null)
             {
@@ -89,13 +62,13 @@ namespace OrayaAct.Controllers
                 instructor.HiringDate = newInstructor.HiringDate;
             }
 
-            return View("Index", InstructorList);
+            return View("Index", _populateData.InstructorList);
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == id);
+            Instructor? instructor = _populateData.InstructorList.FirstOrDefault(x => x.Id == id);
 
             if (instructor != null)
             {
@@ -108,15 +81,15 @@ namespace OrayaAct.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == id);
-            InstructorList.Remove(instructor);
-            return View("Index", InstructorList);
+            Instructor? instructor = _populateData.InstructorList.FirstOrDefault(x => x.Id == id);
+            _populateData.InstructorList.Remove(instructor);
+            return View("Index", _populateData.InstructorList);
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            Instructor? instructor = InstructorList.FirstOrDefault(x => x.Id == id);
+            Instructor? instructor = _populateData.InstructorList.FirstOrDefault(x => x.Id == id);
             if (instructor != null)
             {
                 return View(instructor);

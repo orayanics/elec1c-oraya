@@ -1,64 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrayaAct.Models;
+using OrayaAct.Services;
+
 
 namespace OrayaAct.Controllers
 {
     public class StudentController : Controller
     {
-        List<Student> StudentList = new List<Student>
+        // Call interface
+        private IPopulateDataService? _populateData;
+
+        // Constructor to instantiate
+        public StudentController(IPopulateDataService populateData)
         {
-            new Student()
-            {
-                Id = 1,
-                FirstName = "Nicole",
-                LastName = "Oraya",
-                GPA = 1.4,
-                Course = Course.BSIT,
-                AdmissionDate = DateOnly.Parse("2022/1/31"),
-                Email = "nicole.oraya.cics@ust.edu.ph"
-            },
-            new Student()
-            {
-                Id = 2,
-                FirstName = "Miguel",
-                LastName = "Oraya",
-                GPA = 1.5,
-                Course = Course.BSIS,
-                AdmissionDate = DateOnly.Parse("2019/05/23"),
-                Email = "miguel.oraya.cics@ust.edu.ph"
-            },
-            new Student()
-            {
-                Id = 3,
-                FirstName = "Josephine",
-                LastName = "Oraya",
-                GPA = 1.3,
-                Course = Course.BSCS,
-                AdmissionDate = DateOnly.Parse("2018/02/01"),
-                Email = "josephine.oraya.cics@ust.edu.ph"
-            },
-            new Student()
-            {
-                Id = 4,
-                FirstName = "Bada",
-                LastName = "Lee",
-                GPA = 1.4,
-                Course = Course.OTHER,
-                AdmissionDate = DateOnly.Parse("2022/06/28"),
-                Email = "bada.lee.cics@ust.edu.ph"
-            }
-
-        };
-
+            _populateData = populateData;
+        }
 
         public IActionResult Index()
         {
-            return View(StudentList);
+            return View(_populateData.StudentList);
         }
 
         public IActionResult ShowDetail(int id)
         {
-            Student? student = StudentList.FirstOrDefault(x => x.Id == id);
+            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
 
             if(student != null)
             {
@@ -71,20 +36,23 @@ namespace OrayaAct.Controllers
         [HttpPost]
         public IActionResult Add(Student newStudent)
         {
-            StudentList.Add(newStudent);
-            return View("Index", StudentList);
+            _populateData.StudentList.Add(newStudent);
+            return View("Index", _populateData.StudentList);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
+            var idAdd = (_populateData.StudentList.Count+1).ToString();
+            ViewBag.idAdd = idAdd;
+            //ViewBag["increment"] = number;
             return View();
         }
 
         [HttpPost]
         public IActionResult Update(Student newStudent)
         {
-            Student? student = StudentList.FirstOrDefault(x => x.Id == newStudent.Id);
+            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == newStudent.Id);
 
             if (student != null)
             {
@@ -97,13 +65,13 @@ namespace OrayaAct.Controllers
                 student.Email = newStudent.Email;
             }
 
-            return View("Index", StudentList);
+            return View("Index", _populateData.StudentList);
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Student? student = StudentList.FirstOrDefault(x => x.Id == id);
+            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
 
             if (student != null)
             {
@@ -116,15 +84,15 @@ namespace OrayaAct.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            Student? student = StudentList.FirstOrDefault(x => x.Id == id);
-            StudentList.Remove(student);
-            return View("Index", StudentList);
+            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
+            _populateData.StudentList.Remove(student);
+            return View("Index", _populateData.StudentList);
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            Student? student = StudentList.FirstOrDefault(x => x.Id == id);
+            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
             if (student != null)
             {
                 return View(student);
