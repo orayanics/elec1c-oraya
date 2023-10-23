@@ -23,7 +23,7 @@
         <tr>
             <td>@student.FirstName @student.LastName</td>
             <td>@student.Course</td>
-            <td>@student.AdmissionDate</td>
+            <td>@student.AdmissionDate.ToShortDateString()</td>
             <td>@student.Email</td>
             <td>@student.GPA</td>
             <td><a asp-action="ShowDetail" asp-route-id="@student.Id" class="btn btn-primary">Show Details</a></td>

@@ -5,13 +5,13 @@ namespace OrayaAct.Services
 {
     public class PopulateDataService : IPopulateDataService
     {
-        public List<Student> StudentList {  get; }
+        public List<Student> StudentList { get; }
         public List<Instructor> InstructorList { get; }
 
         // Constructor
         public PopulateDataService()
         {
-           StudentList = new List<Student>()
+            StudentList = new List<Student>()
            {
                 new Student()
                 {
@@ -20,7 +20,7 @@ namespace OrayaAct.Services
                     LastName = "Oraya",
                     GPA = 1.4,
                     Course = Course.BSIT,
-                    AdmissionDate = DateOnly.Parse("2022/1/31"),
+                    AdmissionDate = DateTime.Parse("2022/1/31"),
                     Email = "nicole.oraya.cics@ust.edu.ph"
                 },
                 new Student()
@@ -30,7 +30,7 @@ namespace OrayaAct.Services
                     LastName = "Oraya",
                     GPA = 1.5,
                     Course = Course.BSIS,
-                    AdmissionDate = DateOnly.Parse("2019/05/23"),
+                    AdmissionDate = DateTime.Parse("2019/05/23"),
                     Email = "miguel.oraya.cics@ust.edu.ph"
                 },
                 new Student()
@@ -40,7 +40,7 @@ namespace OrayaAct.Services
                     LastName = "Oraya",
                     GPA = 1.3,
                     Course = Course.BSCS,
-                    AdmissionDate = DateOnly.Parse("2018/02/01"),
+                    AdmissionDate = DateTime.Parse("2018/02/01"),
                     Email = "josephine.oraya.cics@ust.edu.ph"
                 },
                 new Student()
@@ -50,7 +50,7 @@ namespace OrayaAct.Services
                     LastName = "Lee",
                     GPA = 1.4,
                     Course = Course.OTHER,
-                    AdmissionDate = DateOnly.Parse("2022/06/28"),
+                    AdmissionDate = DateTime.Parse("2022/06/28"),
                     Email = "bada.lee.cics@ust.edu.ph"
                 }
            };
@@ -64,7 +64,7 @@ namespace OrayaAct.Services
                 LastName = "Montano",
                 IsTenured = true,
                 Rank = Rank.Instructor,
-                HiringDate = DateOnly.Parse("2022/05/21")
+                HiringDate = DateTime.Parse("2022/05/21")
             },
             new Instructor()
             {
@@ -73,7 +73,7 @@ namespace OrayaAct.Services
                 LastName = "Eleazar",
                 IsTenured = true,
                 Rank = Rank.AssistantProfessor,
-                HiringDate = DateOnly.Parse("2021/05/21")
+                HiringDate = DateTime.Parse("2021/05/21")
             },
             new Instructor()
             {
@@ -82,7 +82,7 @@ namespace OrayaAct.Services
                 LastName = "Ollanda",
                 IsTenured = true,
                 Rank = Rank.AssociateProfessor,
-                HiringDate = DateOnly.Parse("2019/05/21")
+                HiringDate = DateTime.Parse("2019/05/21")
             },
             new Instructor()
             {
@@ -91,11 +91,11 @@ namespace OrayaAct.Services
                 LastName = "Lintag",
                 IsTenured = true,
                 Rank = Rank.Professor,
-                HiringDate = DateOnly.Parse("2019/05/21")
+                HiringDate = DateTime.Parse("2019/05/21")
             },
             };
         }
     }
 
-    
+
 }

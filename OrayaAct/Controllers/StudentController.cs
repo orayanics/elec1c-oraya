@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrayaAct.Database;
 using OrayaAct.Models;
 using OrayaAct.Services;
 
@@ -8,22 +9,31 @@ namespace OrayaAct.Controllers
     public class StudentController : Controller
     {
         // Call interface
-        private IPopulateDataService? _populateData;
+        // private IPopulateDataService? _populateData;
+
+        // Db Context
+        private readonly OrayaDbContext _dbContext;
 
         // Constructor to instantiate
-        public StudentController(IPopulateDataService populateData)
+        //public StudentController(IPopulateDataService populateData)
+        //{
+        //    _populateData = populateData;
+        //}
+
+        public StudentController(OrayaDbContext dbContext)
         {
-            _populateData = populateData;
+            _dbContext = dbContext;
+
         }
 
         public IActionResult Index()
         {
-            return View(_populateData.StudentList);
+            return View(_dbContext.Students);
         }
 
         public IActionResult ShowDetail(int id)
         {
-            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
+            Student? student = _dbContext.Students.FirstOrDefault(x => x.Id == id);
 
             if(student != null)
             {
@@ -36,23 +46,22 @@ namespace OrayaAct.Controllers
         [HttpPost]
         public IActionResult Add(Student newStudent)
         {
-            _populateData.StudentList.Add(newStudent);
-            return View("Index", _populateData.StudentList);
+            _dbContext.Students.Add(newStudent);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            var idAdd = (_populateData.StudentList.Count+1).ToString();
-            ViewBag.idAdd = idAdd;
-            //ViewBag["increment"] = number;
+            var number = _dbContext.Instructors.Count() + 1;
+            ViewBag.increment = number.ToString();
             return View();
         }
 
         [HttpPost]
         public IActionResult Update(Student newStudent)
         {
-            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == newStudent.Id);
+            Student? student = _dbContext.Students.FirstOrDefault(x => x.Id == newStudent.Id);
 
             if (student != null)
             {
@@ -63,15 +72,17 @@ namespace OrayaAct.Controllers
                 student.Course = newStudent.Course;
                 student.AdmissionDate = newStudent.AdmissionDate;
                 student.Email = newStudent.Email;
+                _dbContext.Students.Update(student);
+                _dbContext.SaveChanges();
             }
 
-            return View("Index", _populateData.StudentList);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
+            Student? student = _dbContext.Students.FirstOrDefault(x => x.Id == id);
 
             if (student != null)
             {
@@ -84,15 +95,16 @@ namespace OrayaAct.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
-            _populateData.StudentList.Remove(student);
-            return View("Index", _populateData.StudentList);
+            Student? student = _dbContext.Students.FirstOrDefault(x => x.Id == id);
+            _dbContext.Students.Remove(student);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Delete(int? id)
         {
-            Student? student = _populateData.StudentList.FirstOrDefault(x => x.Id == id);
+            Student? student = _dbContext.Students.FirstOrDefault(x => x.Id == id);
             if (student != null)
             {
                 return View(student);

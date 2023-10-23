@@ -33,7 +33,7 @@
                     }
                 }
             <td>@instructor.Rank</td>
-            <td>@instructor.HiringDate</td>
+            <td>@instructor.HiringDate.Date.ToShortDateString()</td>
             <td><a asp-action="ShowDetail" asp-route-id="@instructor.Id" class="btn btn-primary">Show Details</a></td>
             <td><a asp-action="Update" asp-route-id="@instructor.Id" class="btn btn-primary">Update Details</a></td>
             <td><a asp-action="Delete" asp-route-id="@instructor.Id" class="btn btn-danger">Delete</a></td>
