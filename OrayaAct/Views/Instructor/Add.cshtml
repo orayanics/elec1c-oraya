@@ -9,24 +9,26 @@
     </div> *@
 
     <div class="mb-3">
-        <label asp-for="FirstName" class="form-label">First Name</label>
+        <label asp-for="FirstName" class="form-label"></label>
         <input asp-for="FirstName" class="form-control">
     </div>
 
     <div class="mb-3">
-        <label asp-for="LastName" class="form-label">Last Name</label>
+        <label asp-for="LastName" class="form-label"></label>
         <input asp-for="LastName" class="form-control">
     </div>
 
     <div class="mb-3">
-        <p>Position: IsTenured</p>
-        <label asp-for="IsTenured" class="form-label">Yes</label>
-        <input asp-for="IsTenured" type="radio" name="istenured" value="true" />
-        <label asp-for="IsTenured" class="form-label">No</label>
-        <input asp-for="IsTenured" type="radio" name="istenured" value="false" />
+        <label asp-for="IsTenured" class="form-label"></label>
+        <div>
+            <label asp-for="IsTenured" class="form-label">Yes</label>
+            <input asp-for="IsTenured" type="radio" name="istenured" value="true" />
+            <label asp-for="IsTenured" class="form-label">No</label>
+            <input asp-for="IsTenured" type="radio" name="istenured" value="false" />
+        </div>
     </div>
 
-    <label asp-for="Rank" class="form-label">Rank</label>
+    <label asp-for="Rank" class="form-label"></label>
     <select asp-for=Rank class="form-select" aria-label="Select rank">
         <option selected value="">Select</option>
         <option  value="Instructor">Instructor</option>
@@ -38,7 +40,7 @@
     *@
 
     <div class="mb-3">
-        <label asp-for="HiringDate" class="form-label">Hiring Date</label>
+        <label asp-for="HiringDate" class="form-label"></label>
         <input asp-for="HiringDate" type="date" class="form-control">
     </div>
 

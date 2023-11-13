@@ -54,7 +54,7 @@ namespace OrayaAct.Controllers
         public IActionResult Add()
         {
             var number = _dbContext.Instructors.Count() + 1;
-            ViewBag.increment = number.ToString();
+            ViewBag.increment = number;
             return View();
         }
 

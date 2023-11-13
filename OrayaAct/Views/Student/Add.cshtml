@@ -4,26 +4,26 @@
 
 <form method="post" asp-action="Add">
     <div class="mb-3 d-none">
-        <label asp-for="Id" class="form-label d-none">Id</label>
-        <input asp-for="Id" class="form-control d-none" value="@ViewBag.idAdd" placeholder="@ViewBag.idAdd">
+        <label asp-for="Id" class="form-label d-none"></label>
+        <input asp-for="Id" class="form-control d-none" value="@ViewBag.increment" placeholder="@ViewBag.increment">
     </div>
 
     <div class="mb-3">
-        <label asp-for="FirstName" class="form-label">First Name</label>
+        <label asp-for="FirstName" class="form-label"></label>
         <input asp-for="FirstName" class="form-control">
     </div>
 
     <div class="mb-3">
-        <label asp-for="LastName" class="form-label">Last Name</label>
+        <label asp-for="LastName" class="form-label"></label>
         <input asp-for="LastName" class="form-control">
     </div>
 
     <div class="mb-3">
-        <label asp-for="GPA" class="form-label">GPA</label>
+        <label asp-for="GPA" class="form-label"></label>
         <input asp-for="GPA" class="form-control">
     </div>
 
-    <label asp-for="Course" class="form-label">Course</label>
+    <label asp-for="Course" class="form-label"></label>
      <select asp-for=Course class="form-select" aria-label="Select Course">
         <option selected value="">Select</option>
         <option value="BSIT">BSIT</option>
@@ -35,12 +35,12 @@
  *@
 
     <div class="mb-3">
-        <label asp-for="AdmissionDate" class="form-label">Admission Date</label>
+        <label asp-for="AdmissionDate" class="form-label"></label>
         <input asp-for="AdmissionDate" class="form-control" type="date">
     </div>
 
     <div class="mb-3">
-        <label asp-for="Email" class="form-label">Student Email</label>
+        <label asp-for="Email" class="form-label"></label>
         <input asp-for="Email" class="form-control" id="studentEmail">
     </div>
 
