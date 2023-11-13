@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OrayaAct.Models;
+using OrayaAct.Data;
 
 namespace OrayaAct.Database
 {
-    public class OrayaDbContext : DbContext
+    public class OrayaDbContext : IdentityDbContext<UserIden>
     {
         // Declare and set your tables
         public DbSet<Instructor> Instructors { get; set; }
