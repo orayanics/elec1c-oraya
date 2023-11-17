@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrayaAct.Database;
 using OrayaAct.Models;
 using OrayaAct.Services;
@@ -6,6 +7,7 @@ using OrayaAct.Services;
 
 namespace OrayaAct.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StudentController : Controller
     {
         // Call interface

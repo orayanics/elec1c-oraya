@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<OrayaDbContext>(options => options.UseSqlServer
     (builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<UserIden>
+builder.Services.AddIdentity<UserIden, IdentityRole>
     (options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -25,9 +25,12 @@ builder.Services.AddDefaultIdentity<UserIden>
         options.Password.RequireUppercase = false;
         options.Password.RequireLowercase = false;
     })
+    .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<OrayaDbContext>();
 
+builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+
 
 var app = builder.Build();
 
@@ -51,5 +54,20 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
+
+using(var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    var roles = new[] { "Admin", "User" };
+
+    foreach(var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+            await roleManager.CreateAsync(new IdentityRole(role));
+    }
+}
 
 app.Run();

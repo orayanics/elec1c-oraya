@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrayaAct.Database;
 using OrayaAct.Models;
-using OrayaAct.Services;
 
 namespace OrayaAct.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class InstructorController : Controller
     {
         // Call interface
@@ -54,15 +53,15 @@ namespace OrayaAct.Controllers
         [HttpPost]
         public IActionResult Add(Instructor newInstructor)
         {
-            
+
             if (ModelState.IsValid)
-            {               
+            {
                 _dbContext.Instructors.Add(newInstructor);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(newInstructor);
-            
+
         }
 
         [HttpGet]
